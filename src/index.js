@@ -26,7 +26,8 @@ function keyboard(s){return {inline_keyboard:[
 [{text:"🟡 دور از دسترس",callback_data:"s:away"},{text:"🔴 آفلاین",callback_data:"s:offline"}],
 [{text:s.autoReply?"🔔 خاموش‌کردن پاسخ خودکار":"🔕 روشن‌کردن پاسخ خودکار",callback_data:"toggle"}],
 [{text:"✏️ ویرایش پیام خودکار",callback_data:"reply_edit"},{text:"↩️ متن پیش‌فرض",callback_data:"reply_reset"}],
-[{text:"🧑‍💼 روشن/خاموش منشی",callback_data:"sec_toggle"},{text:"⏱ راهنمای زمان‌بندی",callback_data:"schedule_help"}],\n[{text:"👥 مدیریت استثناها",callback_data:"exceptions_help"},{text:"📋 راهنمای منشی",callback_data:"sec_help"}],
+[{text:"🧑‍💼 روشن/خاموش منشی",callback_data:"sec_toggle"},{text:"⏱ راهنمای زمان‌بندی",callback_data:"schedule_help"}],
+[{text:"👥 مدیریت استثناها",callback_data:"exceptions_help"},{text:"📋 راهنمای منشی",callback_data:"sec_help"}],
 [{text:"📊 آمار و گزارش",callback_data:"stats"},{text:"🧭 راهنمای امکانات",callback_data:"help"}],
 [{text:"🔄 بروزرسانی پنل",callback_data:"home"}]
 ]}}
@@ -51,7 +52,9 @@ if(d==="stats"){const a=await e.STORE.get("stats:in")||"0",b=await e.STORE.get("
 if(d==="help"){await tg(e,"answerCallbackQuery",{callback_query_id:q.id});await tg(e,"sendMessage",{chat_id:chat,text:help(),reply_markup:{inline_keyboard:[[{text:"↩️ بازگشت به پنل",callback_data:"home"}]]}});return}
 if(d==="sec_toggle"){s.secretaryEnabled=s.secretaryEnabled===false;await ss(e,s);await tg(e,"answerCallbackQuery",{callback_query_id:q.id,text:s.secretaryEnabled?"منشی فعال شد":"منشی خاموش شد"});await tg(e,"editMessageText",{chat_id:chat,message_id:mid,text:panelText(s),reply_markup:keyboard(s)});return}
 if(d==="sec_help"){await tg(e,"answerCallbackQuery",{callback_query_id:q.id});await tg(e,"sendMessage",{chat_id:chat,text:"🧑‍💼 راهنمای منشی\nخدمات: عنوان اول | عنوان دوم | توضیح\nمنشی روشن / منشی خاموش\nپاسخ به شناسه: متن پاسخ"});return}
-if(d==="schedule_help"){await tg(e,"answerCallbackQuery",{callback_query_id:q.id});await tg(e,"sendMessage",{chat_id:chat,text:"⏱ زمان‌بندی روزانه به وقت تهران\\nزمان‌بندی 09:00-17:00 مشغول\\nیا: زمان‌بندی 22:00-08:00 آفلاین\\nزمان‌بندی خاموش\\nبرای مشاهده: زمان‌بندی"});return}\nif(d==="exceptions_help"){await tg(e,"answerCallbackQuery",{callback_query_id:q.id});await tg(e,"sendMessage",{chat_id:chat,text:"👥 استثناها پاسخ خودکار نمی‌گیرند.\\nاستثنا افزودن 123456789\\nاستثنا حذف 123456789\\nاستثناها"});return}\nif(d==="home"){await tg(e,"answerCallbackQuery",{callback_query_id:q.id});await tg(e,"editMessageText",{chat_id:chat,message_id:mid,text:panelText(s),reply_markup:keyboard(s)});return}
+if(d==="schedule_help"){await tg(e,"answerCallbackQuery",{callback_query_id:q.id});await tg(e,"sendMessage",{chat_id:chat,text:"⏱ زمان‌بندی روزانه به وقت تهران\\nزمان‌بندی 09:00-17:00 مشغول\\nیا: زمان‌بندی 22:00-08:00 آفلاین\\nزمان‌بندی خاموش\\nبرای مشاهده: زمان‌بندی"});return}
+if(d==="exceptions_help"){await tg(e,"answerCallbackQuery",{callback_query_id:q.id});await tg(e,"sendMessage",{chat_id:chat,text:"👥 استثناها پاسخ خودکار نمی‌گیرند.\\nاستثنا افزودن 123456789\\nاستثنا حذف 123456789\\nاستثناها"});return}
+if(d==="home"){await tg(e,"answerCallbackQuery",{callback_query_id:q.id});await tg(e,"editMessageText",{chat_id:chat,message_id:mid,text:panelText(s),reply_markup:keyboard(s)});return}
 await tg(e,"answerCallbackQuery",{callback_query_id:q.id})}
 function help(){return "🧰 امکانات ربات" + NL + NL+"خصوصی: محاسبه 12*(3+2)، رمز 20، عدد تصادفی 1 100، شیر یا خط، تاس، نظرسنجی: سؤال | گزینه۱ | گزینه۲، متن‌سنجی: متن، برعکس: متن، کدگذاری: متن، رمزگشایی: کد، انتخاب: گزینه۱ | گزینه۲"+NL+"یادداشت: یادداشت: متن | یادداشت‌ها | پاک کردن یادداشت‌ها"+NL+"منشی: خدمات: متن | منشی روشن/خاموش | پاسخ به شناسه: متن"+NL+"یادآوری: یادآوری 10 دقیقه متن کار"+NL+NL+"گروه: راهنما، شناسه، قوانین، تنظیم قوانین: متن، قفل لینک، بازکردن لینک، ضداسپم روشن/خاموش، خوشامدگویی روشن/خاموش"+NL+"در پاسخ به پیام: سنجاق، حذف، اخطار، اخطارها، سکوت 10، رفع سکوت، اخراج، مسدود، رفع مسدود"}
 function digits(s){return s.replace(/[۰-۹]/g,d=>String("۰۱۲۳۴۵۶۷۸۹".indexOf(d))).replace(/[٠-٩]/g,d=>String("٠١٢٣٤٥٦٧٨٩".indexOf(d)))}

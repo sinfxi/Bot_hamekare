@@ -1,3 +1,10 @@
 name = "bot-hamekare"
 main = "src/index.js"
 compatibility_date = "2025-11-01"
+
+[[kv_namespaces]]
+binding = "STORE"
+id = "98273327c07849ebbbe098af9a789af4"
+
+[triggers]
+crons = ["* * * * *"]
